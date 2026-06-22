@@ -457,16 +457,42 @@ function setupEventListeners() {
     // ── Menu mobile ──────────────────────────────────────────────────────────
     const mobileToggle = document.getElementById("mobile-menu-toggle");
     const mobileNav    = document.getElementById("main-nav-menu");
+
+    function closeMobileMenu() {
+        if (!mobileNav || !mobileToggle) return;
+        mobileNav.classList.remove("mobile-active");
+        mobileToggle.classList.remove("open");
+        mobileToggle.setAttribute("aria-expanded", "false");
+        document.body.style.overflow = "";
+    }
+
+    function openMobileMenu() {
+        if (!mobileNav || !mobileToggle) return;
+        mobileNav.classList.add("mobile-active");
+        mobileToggle.classList.add("open");
+        mobileToggle.setAttribute("aria-expanded", "true");
+        document.body.style.overflow = "hidden";
+    }
+
     if (mobileToggle && mobileNav) {
-        mobileToggle.addEventListener("click", () => {
-            mobileNav.classList.toggle("mobile-active");
-            mobileToggle.classList.toggle("open");
+        mobileToggle.addEventListener("click", (e) => {
+            e.stopPropagation();
+            const isOpen = mobileNav.classList.contains("mobile-active");
+            isOpen ? closeMobileMenu() : openMobileMenu();
         });
-        // Fermer le menu en cliquant ailleurs
+
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "Escape" && mobileNav.classList.contains("mobile-active")) {
+                closeMobileMenu();
+                mobileToggle.focus();
+            }
+        });
+
         document.addEventListener("click", (e) => {
-            if (!mobileToggle.contains(e.target) && !mobileNav.contains(e.target)) {
-                mobileNav.classList.remove("mobile-active");
-                mobileToggle.classList.remove("open");
+            if (mobileNav.classList.contains("mobile-active") &&
+                !mobileToggle.contains(e.target) &&
+                !mobileNav.contains(e.target)) {
+                closeMobileMenu();
             }
         });
     }
@@ -485,9 +511,8 @@ function setupEventListeners() {
         } else {
             navigateToPage(target);
         }
-        // Fermer menu mobile
-        if (mobileNav) mobileNav.classList.remove("mobile-active");
-        if (mobileToggle) mobileToggle.classList.remove("open");
+        // Fermer menu mobile après navigation
+        closeMobileMenu();
     });
 
     // ── Bouton Réserver header ────────────────────────────────────────────────
