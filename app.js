@@ -1069,29 +1069,33 @@ function renderAdminCalendar() {
 // 8. ACTIONS ADMIN (VALIDATIONS & MODIFICATIONS)
 // --------------------------------------------------------------------------
 window.adminConfirmBooking = function(bookingId) {
+    if (!confirm(`\u26A0\uFE0F CONFIRMATION REQUISE\n\nAvez-vous bien contacté le client et reçu l'acompte/garantie pour la réservation ${bookingId} ?\n\nCliquez sur OK pour Valider et déduire cette chambre du stock.`)) {
+        return;
+    }
+
     const res = state.reservations.find(r => r.id === bookingId);
     if (!res) return;
 
     const stocks = calculateAvailableStocksForPeriod(res.checkin, res.checkout);
     if (stocks[res.roomType] <= 0) {
-        showToast(`⚠️ Impossible : Plus de disponibilité pour cette catégorie sur cette période !`, "error");
+        showToast(`❌ Impossible : Plus de disponibilité pour cette catégorie sur cette période !`, "error");
         return;
     }
 
     res.status = "Confirmé";
     saveDatabase();
     renderAdminDashboard();
-    showToast(`✓ Demande ${res.id} confirmée. Le stock physique est bloqué.`, "success");
+    showToast(`✅ Demande ${res.id} confirmée. Le stock physique est bloqué.`, "success");
 };
 
 window.adminCancelBooking = function(bookingId) {
-    if (confirm(`Annuler la demande ${bookingId} et libérer le stock ?`)) {
+    if (confirm(`\u26A0\uFE0F ATTENTION\n\nÊtes-vous sûr de vouloir ANNULER la réservation ${bookingId} ?\n\nCette action libérera le stock immédiatement.`)) {
         const res = state.reservations.find(r => r.id === bookingId);
         if (res) {
             res.status = "Annulé";
             saveDatabase();
             renderAdminDashboard();
-            showToast(`Demande ${bookingId} annulée.`, "info");
+            showToast(`ℹ️ Réservation ${bookingId} annulée avec succès.`, "info");
         }
     }
 };
@@ -1128,6 +1132,10 @@ function saveAdminModification() {
     const checkout = document.getElementById("edit-checkout").value;
     const roomType = document.getElementById("edit-room-type").value;
     const status   = document.getElementById("edit-status").value;
+
+    if (!confirm(`\u26A0\uFE0F CONFIRMATION DE MODIFICATION\n\nÊtes-vous sûr de vouloir enregistrer ces modifications ?\nAssurez-vous que les nouvelles dates sont disponibles.`)) {
+        return;
+    }
 
     if (status === "Confirmé") {
         const originalStatus = res.status;
