@@ -417,81 +417,11 @@ button, select, input, textarea {
     transform-origin: center;
 }
 
-/* ── Animation hamburger → X quand ouvert ────────────────────────────────── */
-.mobile-menu-toggle.open span:nth-child(1) {
-    transform: translateY(7px) rotate(45deg);
-}
-.mobile-menu-toggle.open span:nth-child(2) {
-    opacity: 0;
-    transform: scaleX(0);
-}
-.mobile-menu-toggle.open span:nth-child(3) {
-    transform: translateY(-7px) rotate(-45deg);
-}
-
-/* ── Menu déroulant mobile ───────────────────────────────────────────────── */
-.main-nav.mobile-active {
-    display: flex !important;
-    flex-direction: column;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(7, 5, 4, 0.97);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    z-index: 1000;
-    padding: 100px 32px 40px;
-    align-items: flex-start;
-    justify-content: flex-start;
-    overflow-y: auto;
-    animation: slideInMenu 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-@keyframes slideInMenu {
-    from { opacity: 0; transform: translateX(-20px); }
-    to   { opacity: 1; transform: translateX(0); }
-}
-
-.main-nav.mobile-active ul {
-    flex-direction: column;
-    gap: 0;
-    width: 100%;
-}
-
-.main-nav.mobile-active ul li {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
-}
-
-.main-nav.mobile-active .nav-link {
-    display: block;
-    width: 100%;
-    font-size: 1.1rem;
-    letter-spacing: 0.12em;
-    padding: 18px 0;
-    color: var(--color-text-muted);
-}
-
-.main-nav.mobile-active .nav-link:hover,
-.main-nav.mobile-active .nav-link.active {
-    color: var(--color-accent-gold);
-}
-
-.main-nav.mobile-active .nav-link::after {
-    display: none;
-}
-
 /* Lien Réserver : caché sur desktop, visible dans menu mobile */
 .mobile-nav-cta {
     display: none;
 }
 
-.main-nav.mobile-active .mobile-nav-cta {
-    display: block;
-    border-bottom: none;
-    margin-top: 8px;
-}
 
 /* --------------------------------------------------------------------------
    5. DEFILEMENT DES ETAPES (SPA views)
@@ -2631,6 +2561,75 @@ button, select, input, textarea {
     /* Nav principale masquée — remplacée par le menu mobile */
     .main-nav {
         display: none;
+    }
+
+    /* ── Styles du vrai Menu Déroulant Mobile ────────────────────────────────── */
+    .main-nav.mobile-active {
+        display: flex !important;
+        flex-direction: column;
+        position: absolute;
+        top: 100%; /* S'ouvre juste sous le header */
+        left: 0;
+        right: 0;
+        background-color: rgba(7, 5, 4, 0.98);
+        border-bottom: 1px solid rgba(202, 138, 4, 0.2);
+        z-index: 999;
+        padding: 16px 24px 24px;
+        align-items: flex-start;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+        animation: slideDownMenu 0.3s ease forwards;
+    }
+
+    @keyframes slideDownMenu {
+        from { opacity: 0; transform: translateY(-10px); }
+        to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .main-nav.mobile-active ul {
+        flex-direction: column;
+        gap: 0;
+        width: 100%;
+    }
+
+    .main-nav.mobile-active ul li {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        width: 100%;
+    }
+
+    .main-nav.mobile-active .nav-link {
+        display: block;
+        width: 100%;
+        font-size: 1rem;
+        letter-spacing: 0.12em;
+        padding: 16px 0;
+        color: var(--color-text-muted);
+    }
+
+    .main-nav.mobile-active .nav-link:hover,
+    .main-nav.mobile-active .nav-link.active {
+        color: var(--color-accent-gold);
+    }
+
+    .main-nav.mobile-active .nav-link::after {
+        display: none;
+    }
+
+    .main-nav.mobile-active .mobile-nav-cta {
+        display: block;
+        border-bottom: none;
+        margin-top: 16px;
+    }
+
+    /* ── Animation hamburger → X quand ouvert ────────────────────────────────── */
+    .mobile-menu-toggle.open span:nth-child(1) {
+        transform: translateY(7px) rotate(45deg);
+    }
+    .mobile-menu-toggle.open span:nth-child(2) {
+        opacity: 0;
+        transform: scaleX(0);
+    }
+    .mobile-menu-toggle.open span:nth-child(3) {
+        transform: translateY(-7px) rotate(-45deg);
     }
 
     /* Bouton "Réserver" header masqué — accessible depuis le menu mobile */
