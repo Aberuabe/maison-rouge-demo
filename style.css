@@ -17,8 +17,9 @@
     --color-accent-gold-hover: #EAB308;
     
     /* Couleurs de texte */
-    --color-text-main: #F5F5F4;         /* Blanc cassé / pierre légère */
-    --color-text-muted: #A8A29E;        /* Gris chaud de soutien */
+    --color-text-main: #F7F5F3;         /* Blanc cassé / pierre légère — contraste max */
+    --color-text-muted: #C9C3BD;        /* Gris chaud — lisible sur fond sombre */
+    --color-text-secondary: #9A948F;    /* Texte tertiaire, dates, labels */
     --color-text-dark: #0C0A09;
     
     /* Statuts */
@@ -63,7 +64,7 @@ body {
     background-color: var(--color-bg-dark);
     color: var(--color-text-main);
     font-family: var(--font-ui);
-    line-height: 1.6;
+    line-height: 1.75;
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
     min-height: 100%;
@@ -505,12 +506,13 @@ button, select, input, textarea {
 }
 
 .hero-subtitle {
-    font-size: 0.95rem;
+    font-size: 1rem;
     font-weight: 300;
     max-width: 700px;
-    margin: 0 auto;
+    margin: 0 auto 8px;
     color: var(--color-text-muted);
-    line-height: 1.6;
+    line-height: 1.8;
+    letter-spacing: 0.01em;
 }
 
 /* Widget de Recherche Flottant */
@@ -720,8 +722,10 @@ button, select, input, textarea {
 
 .section-desc {
     color: var(--color-text-muted);
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     font-weight: 300;
+    line-height: 1.8;
+    margin-top: 8px;
 }
 
 .comparison-grid {
@@ -788,13 +792,14 @@ button, select, input, textarea {
 }
 
 .comparison-list li {
-    font-size: 0.8rem;
+    font-size: 0.82rem;
     font-weight: 300;
     color: var(--color-text-muted);
     display: flex;
     align-items: flex-start;
     gap: 12px;
-    line-height: 1.5;
+    line-height: 1.7;
+    padding: 2px 0;
 }
 
 .comparison-list li strong {
@@ -863,8 +868,10 @@ button, select, input, textarea {
 .benefits-intro {
     color: var(--color-text-muted);
     font-size: 1rem;
-    line-height: 1.7;
+    line-height: 1.85;
     font-weight: 300;
+    max-width: 560px;
+    margin: 0 auto;
 }
 
 .benefits-grid {
@@ -918,9 +925,9 @@ button, select, input, textarea {
 }
 
 .benefit-card p {
-    font-size: 0.875rem;
+    font-size: 0.9rem;
     color: var(--color-text-muted);
-    line-height: 1.7;
+    line-height: 1.85;
     font-weight: 300;
 }
 

@@ -3,14 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#070504">
     <title>Maison Rouge Cotonou — Réservation Directe | Hôtel 4 Étoiles Bénin</title>
     <meta name="description" content="Réservez directement votre séjour à l'Hôtel Maison Rouge Cotonou. Meilleur tarif garanti, confirmation rapide, art contemporain africain et 2 piscines extérieures. Boulevard de la Marina, Cotonou, Bénin.">
-    <meta name="keywords" content="hôtel cotonou, maison rouge, réservation hôtel bénin, hôtel luxe cotonou, hôtel boutique afrique">
+    <meta name="robots" content="index, follow">
     <meta property="og:title" content="Maison Rouge Cotonou — Réservation Directe">
-    <meta property="og:description" content="Hôtel d'art 4 étoiles à Cotonou, Bénin. Réservez en direct pour le meilleur tarif.">
+    <meta property="og:description" content="Hôtel d'art 4 étoiles à Cotonou, Bénin. Réservez en direct pour le meilleur tarif garanti.">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="fr_BJ">
+
+    <!-- Préconnexion Google Fonts (réduit la latence DNS) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Préchargement de l'image hero (LCP critique) -->
+    <link rel="preload" as="image" href="assets/images/hero.jpg" fetchpriority="high">
+
+    <!-- Police principale : display=swap → texte visible même si la police tarde -->
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Feuille de style principale -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -78,7 +90,7 @@
                         </span>
                         <span class="trust-badge" role="listitem">
                             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
-                            MTN MoMo · Moov Flooz
+                            Confirmation en moins de 2h
                         </span>
                         <span class="trust-badge" role="listitem">
                             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
@@ -216,10 +228,10 @@
                         </div>
                         <div class="benefit-card animate-fade-up">
                             <div class="benefit-icon" aria-hidden="true">
-                                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+                                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
                             </div>
-                            <h3>Paiement Mobile Money</h3>
-                            <p>Réglez par MTN MoMo, Moov Flooz ou à l'arrivée. Aucune carte bancaire internationale requise.</p>
+                            <h3>Flexibilité de règlement</h3>
+                            <p>Règlement à l'arrivée ou selon les modalités convenues directement avec la réception de l'hôtel.</p>
                         </div>
                         <div class="benefit-card animate-fade-up">
                             <div class="benefit-icon" aria-hidden="true">
@@ -441,7 +453,7 @@
                 <div class="section-title-wrapper text-center animate-fade-up">
                     <span class="section-subtitle">Finalisez votre réservation</span>
                     <h2 class="section-title">Vos Coordonnées</h2>
-                    <p class="section-desc">Aucune carte bancaire requise. Validation par MTN MoMo, Moov Flooz ou paiement à l'arrivée.</p>
+                    <p class="section-desc">Renseignez vos coordonnées pour finaliser votre demande de réservation. L'équipe de réception vous contactera directement.</p>
                     <div style="display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:14px;">
                         <span class="security-badge">
                             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
@@ -479,7 +491,7 @@
                                 </span>
                                 <input type="tel" id="cust-whatsapp" required aria-required="true" placeholder="+229 01 XX XX XX XX" autocomplete="tel">
                             </div>
-                            <small class="form-help">Utilisé pour l'assistance directe et l'acompte Mobile Money.</small>
+                            <small class="form-help">Utilisé pour la confirmation et l'assistance directe par l'équipe de réception.</small>
                         </div>
 
                         <div class="form-group">
@@ -1165,6 +1177,7 @@
     <!-- Toast Container (injecté par JS) -->
     <div id="toast-container" aria-live="polite" aria-atomic="false"></div>
 
-    <script src="app.js"></script>
+    <!-- Script principal en defer : ne bloque pas le rendu de la page -->
+    <script src="app.js" defer></script>
 </body>
 </html>
